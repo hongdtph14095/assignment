@@ -1,48 +1,85 @@
-// import './style.css'
+import Navigo from "navigo";
+import Footer from "./components/footer";
+import Header from "./components/header";
+import AboutPage from "./pages/about";
+import DetailPage from "./pages/detail";
+import HomePage from "./pages/home";
+import ProductPage from "./pages/product";
+import AdminNewPage from "./pages/admin/news";
+import AdminProductList from "./components/admin/products";
+import Signup from "./pages/signup";
+import Signin from "./pages/signin";
+import Dashboard from "./pages/admin/dashboard";
+import NewList from "./components/admin/newList";
+import AddProduct from "./pages/admin/add";
 
-// document.querySelector('#app').innerHTML = `
-//   <h1>Hello Vite!</h1>
-//   <a href="https://vitejs.dev/guide/features.html" target="_blank">Documentation</a>
-// `
-import Navigo from 'navigo' 
-import HomePage from './pages/home';
-import ContactPage from './pages/contact';
-import AboutPage from './pages/about';
-import ProductsPage from './pages/products';
-const router = new Navigo("/",{ linksSelector: "a"});
+const router = new Navigo("/", { linksSelector: "a" });
+
 const print = (content) => {
-  document.querySelector("#app").innerHTML = content;
-}
+    document.querySelector("#header").innerHTML = Header.render();
+    document.querySelector("#app").innerHTML = content;
+    document.querySelector("#footer").innerHTML = Footer.render();
+};
 
 router.on({
-  "/":() => {
-    document.querySelector("#app").innerHTML="Home Page";
-  },
-  "/about":()=>{
-    document.querySelector("#app").innerHTML="About Page";
-  },
-  "/contact":()=>{
-    document.querySelector("#app").innerHTML="Contact Page";
-  },
-  "/products":()=>{
-    document.querySelector("#app").innerHTML="Products Page";
-  },
+    "/": () => {
+        print(HomePage.render());
+    },
+    "/about": () => {
+        print(AboutPage.render());
+    },
+    "/product": () => {
+        print(ProductPage.render());
+    },
+    "/product/:id": ({ data }) => {
+        const { id } = data;
+        print(DetailPage.render(id));
+    },
+    "/admin/product": () => {
+        print(AdminNewPage.render());
+    },
+    "/admin/product/:id/edit": ({ data }) => {
+        const { id } = data;
+        print(AdminProductList.render(id));
+    },
+    "/signup": () => {
+        print(Signup.render());
+    },
+    "/signin": () => {
+        print(Signin.render());
+    },
+    "/admin/newList": () => {
+        print(NewList.render());
+    },
+    "/admin/dashboard": () => {
+        print(Dashboard.render());
+    },
+    "/admin/add": () => {
+        print(AddProduct.render());
+    },
 });
-router.notFound(() =>  console.log("Not found page"));
+
 router.resolve();
-// class KhuonBanh{
-//   constructor(luongDuong, luongBot){
-//     this.luongDuong = luongDuong;
-//     this.luongBot = luongBot;
-//   }
-//   showInfo(){
-//     console.log(`
-//     Lượng đường : ${this.luongDuong}
-//     Lượng Bột : ${this.luongBot}
-//     `)
-//   }
+
+// class KhuanBanh {
+//     constructor(luongDuong, luongBot) {
+//         this.luongDuong = luongDuong;
+//         this.luongBot = luongBot;
+//     }
+
+//     showInfo() {
+//         console.log(`
+//             Lượng đường: ${this.luongDuong}
+//             Lượng bột: ${this.luongBot}
+//         `);
+//     }
 // }
-// const banhDeo = new KhuonBanh(5,11);
-// console.log(banhDeo.luongDuong);
+
+// const banhDeo = new KhuanBanh(10, 20);
+// console.log(banhDeo.luongDuong) // 10
+// const banhNuong = new KhuanBanh(30, 50);
+// banhDeo.luongDuong = 20
+// console.log(banhDeo.luongDuong)// 20
 // banhDeo.showInfo();
 
+// banhNuong.showInfo();
