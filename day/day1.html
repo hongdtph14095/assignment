@@ -1,6 +1,6 @@
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,10 +8,53 @@
     <title>Document</title>
     <link rel="stylesheet" href="day1.js">
 </head>
+
 <body>
-    <ul id="menu"></ul>
-    <div id="app"></div>
-    <div id="products"></div>
-    <script src="day1.js" type="module"></script>
+    <script>
+        // function loadScript(src,callback) {
+        //     let script = document.createElement('script');
+        //     script.src= src;
+        //     script.onload = () =>{
+        //         callback(null, script);
+        //     }
+        //     script.onerror =()=>{
+        //         callback("nooooooooo");
+        //     }
+        //     document.head.append(script);
+
+        // }
+
+        // callback in callback ~ callback hell
+        // loadScript('./index.js', function (error, script) {
+        //     if (error) {
+        //         console.log(error)
+        //     }else{
+        //         console.log(script)
+        //     }
+        // });
+
+
+        function loadScript(src) {
+            return new Promise(function (resolve, reject) {
+                let script = document.createElement('script');
+                script.src = src;
+                script.onload = () => {
+                    resolve(script);
+                }
+                script.onerror = () => {
+                    reject("nooooooooo");
+                }
+                document.head.append(script);
+            })
+
+
+        }
+
+        // 
+        // loadScript('https://vnexpress.net/')
+        // .then(result => console.log(result))
+
+    </script>
 </body>
+
 </html>

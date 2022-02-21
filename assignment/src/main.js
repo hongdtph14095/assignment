@@ -2,9 +2,9 @@ import Navigo from "navigo";
 import Footer from "./components/footer";
 import Header from "./components/header";
 import AboutPage from "./pages/about";
-import DetailPage from "./pages/detail";
+import DetailPage from "./pages/newsDetail";
 import HomePage from "./pages/home";
-import ProductPage from "./pages/product";
+import ProductPage from "./pages/products";
 import AdminNewPage from "./pages/admin/news";
 import AdminProductList from "./components/admin/products";
 import Signup from "./pages/signup";
@@ -16,9 +16,9 @@ import AddProduct from "./pages/admin/add";
 const router = new Navigo("/", { linksSelector: "a" });
 
 const print = (content) => {
-    document.querySelector("#header").innerHTML = Header.render();
-    document.querySelector("#app").innerHTML = content;
-    document.querySelector("#footer").innerHTML = Footer.render();
+    document.querySelector("header").innerHTML = Header.render();
+    document.querySelector("app").innerHTML = content;
+    document.querySelector("footer").innerHTML = Footer.render();
 };
 
 router.on({
